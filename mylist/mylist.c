@@ -1,77 +1,78 @@
 //  
-//  template.c
+//  mylist.c
 //
-//  Created by Ramin Toussi on 2017-04-26.
+//  Created by Ramin Toussi on 2017-08-10.
 //
 //
 
-// Do not edit directly here, generate your own copy with similar structure instead
-
-//In case of developing on Windows, use the Microsoft C runtime, instead of Max C runtime
 #ifdef WIN32
 	#define MAXAPI_USE_MSCRT
 #endif // WIN32
 
-// standard Max include, always required
-#include "ext.h"							
+#include "ext.h"
 
-//Global pointer to the class
 static t_class *this_class;
 
-//object declaration
-typedef struct _temp{
-    t_object theObject;     //t_object header should always be here and as the first member
-}t_temp;
+typedef struct _mylist{
+    t_object theObject;
+}t_mylist;
 
-//Define method prototypes including the constructor and optional destructor
-void *temp_new();
-void temp_free();
+void *mylist_new(t_symbol *s, long argc, t_atom *argv);
+void mylist_free(t_mylist *x);
 
-void do_something(t_temp *tmp);
+void receiveList(t_mylist *list, t_symbol *sym, long argc, t_atom *atom);
+void dobang(t_mylist *list);
 
-//The initialization routine must be called ext_main
 void ext_main(void *r){
     //Define the class 
     t_class *c;
     
-/*    
-    Create the class with the new instance routine
-    Be noted the first parameter, "temp" MUST be same as the filename
-    Otherwise the object will fail to work in the MAX patcher 
-*/    
-    c = class_new("temp", (method)temp_new, (method)temp_free, sizeof(t_temp), 0L, 0);
+    c = class_new("mylist", (method)mylist_new, (method)mylist_free, sizeof(t_mylist), 0L, 0);
 
-/*
-    As the first step in creating inlets, add the method that will respond to the incoming message.
-	Add all the object methods (those that are to be exposed to the MAX environment)
-    And the associated functions or so called "Message Handlers" (the C code here)
-    Notice the third parameter, "XXX" is what MAX sees and triggers, examples are "bang" and "int".
-*/    
-    class_addmethod(c, (method)do_something, "XXX", 0);
-    
-    //Register it in the name space 
+    class_addmethod(c, (method)receiveList, "list", A_GIMME, 0);
+    class_addmethod(c, (method)dobang, "bang", 0);
+
     class_register(CLASS_BOX, c);
     
-    //Set to the global pointer
     this_class = c;
 } 
 
-//The object constructor
-void *temp_new(){
-    t_temp *temp = (t_temp*)object_alloc(this_class);
-    
-    //Also, code for inlets & outlets creations goes here
-    
-    return temp;
+void *mylist_new(){
+    t_mylist *mylist = (t_mylist*)object_alloc(this_class);
+    return mylist;
 }
 
 //The object destructor
-void temp_free(){
+void mylist_free(){
     //clean up, free memory, etc
 }
 
+typedef struct pallete{
+    long a;
+    long r;
+    long g;
+    long b;
+}argb;
+
+argb pixels[100];
+int i = 0;
+
 //Message Handlers
-void do_something(t_temp *tmp /*if needed, extra parameter can go here */){
-    //bla bla bla
+void receiveList(t_mylist *list, t_symbol *sym, long argc, t_atom *atom){
+    long a = atom_getlong(atom);
+    long r = atom_getlong(atom + 1);
+    long g = atom_getlong(atom + 2);
+    long b = atom_getlong(atom + 3);
+    argb c;
+    c.a = a;
+    c.r = r;
+    c.g = g;
+    c.b = b;
+    pixels[i] = c;
+    i++;
+    post("%d %d %d %d", a, r, g, b);
 }
 
+void dobang(t_mylist *list){
+    
+}

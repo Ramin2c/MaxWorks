@@ -63,19 +63,6 @@
 			}
 , 			{
 				"box" : 				{
-					"id" : "obj-4",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "jit_matrix", "" ],
-					"patching_rect" : [ 116.0, 289.0, 71.0, 22.0 ],
-					"style" : "",
-					"text" : "jit.mymatrix"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"id" : "obj-15",
 					"maxclass" : "comment",
 					"numinlets" : 1,
@@ -209,9 +196,9 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "jit_matrix", "" ],
-					"patching_rect" : [ 247.0, 212.0, 100.0, 22.0 ],
+					"patching_rect" : [ 247.0, 212.0, 80.0, 22.0 ],
 					"style" : "",
-					"text" : "jit.grab 1024 768"
+					"text" : "jit.grab 10 10"
 				}
 
 			}
@@ -228,15 +215,6 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-3", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-1", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-4", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-1", 0 ]
@@ -308,10 +286,6 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "jit.mymatrix.mxo",
-				"type" : "iLaX"
-			}
-, 			{
 				"name" : "mylist.mxo",
 				"type" : "iLaX"
 			}
