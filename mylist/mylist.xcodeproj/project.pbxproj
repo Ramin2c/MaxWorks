@@ -7,13 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F50C776B1F3DE03200607828 /* bmp.c in Sources */ = {isa = PBXBuildFile; fileRef = F50C776A1F3DE03200607828 /* bmp.c */; };
+		F50C77841F41BD0600607828 /* bmpGenerator.c in Sources */ = {isa = PBXBuildFile; fileRef = F50C77821F41BD0600607828 /* bmpGenerator.c */; };
+		F50C77851F41BD0600607828 /* bmpGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = F50C77831F41BD0600607828 /* bmpGenerator.h */; };
+		F50C77881F41BD7C00607828 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F50C77871F41BD7C00607828 /* ApplicationServices.framework */; };
+		F50C778E1F42E0E700607828 /* fastFifo.c in Sources */ = {isa = PBXBuildFile; fileRef = F50C778C1F42E0E700607828 /* fastFifo.c */; };
+		F50C778F1F42E0E700607828 /* fastFifo.h in Headers */ = {isa = PBXBuildFile; fileRef = F50C778D1F42E0E700607828 /* fastFifo.h */; };
 		F5ACF55B1EBCB0A4002B5416 /* mylist.c in Sources */ = {isa = PBXBuildFile; fileRef = F5ACF55A1EBCB0A4002B5416 /* mylist.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
-		F50C776A1F3DE03200607828 /* bmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bmp.c; sourceTree = "<group>"; };
+		F50C77821F41BD0600607828 /* bmpGenerator.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bmpGenerator.c; sourceTree = "<group>"; };
+		F50C77831F41BD0600607828 /* bmpGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bmpGenerator.h; sourceTree = "<group>"; };
+		F50C77871F41BD7C00607828 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
+		F50C778C1F42E0E700607828 /* fastFifo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fastFifo.c; sourceTree = "<group>"; };
+		F50C778D1F42E0E700607828 /* fastFifo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fastFifo.h; sourceTree = "<group>"; };
 		F5ACF55A1EBCB0A4002B5416 /* mylist.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mylist.c; sourceTree = "<group>"; };
 		F5D01F001F3D97B3006FC1ED /* mylist.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mylist.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F50C77881F41BD7C00607828 /* ApplicationServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,12 +41,24 @@
 		089C166AFE841209C02AAC07 /* iterator */ = {
 			isa = PBXGroup;
 			children = (
-				F50C776A1F3DE03200607828 /* bmp.c */,
+				F50C77821F41BD0600607828 /* bmpGenerator.c */,
+				F50C77831F41BD0600607828 /* bmpGenerator.h */,
+				F50C778D1F42E0E700607828 /* fastFifo.h */,
+				F50C778C1F42E0E700607828 /* fastFifo.c */,
 				F5ACF55A1EBCB0A4002B5416 /* mylist.c */,
 				22CF10220EE984600054F513 /* maxmspsdk.xcconfig */,
 				F5D01F001F3D97B3006FC1ED /* mylist.mxo */,
+				F50C77861F41BD7C00607828 /* Frameworks */,
 			);
 			name = iterator;
+			sourceTree = "<group>";
+		};
+		F50C77861F41BD7C00607828 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F50C77871F41BD7C00607828 /* ApplicationServices.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -47,6 +68,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F50C778F1F42E0E700607828 /* fastFifo.h in Headers */,
+				F50C77851F41BD0600607828 /* bmpGenerator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,7 +146,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5ACF55B1EBCB0A4002B5416 /* mylist.c in Sources */,
-				F50C776B1F3DE03200607828 /* bmp.c in Sources */,
+				F50C778E1F42E0E700607828 /* fastFifo.c in Sources */,
+				F50C77841F41BD0600607828 /* bmpGenerator.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +208,13 @@
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = (
+					"\"$(C74SUPPORT)/max-includes\"",
+					"\"$(C74SUPPORT)/msp-includes\"",
+					"\"$(C74SUPPORT)/jit-includes\"",
+					/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers,
+					/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreServices.framework/Versions/Current/Frameworks/LaunchServices.framework/Versions/Current/Headers,
+				);
 				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
 			};
 			name = Development;
@@ -193,6 +224,13 @@
 			baseConfigurationReference = 22CF10220EE984600054F513 /* maxmspsdk.xcconfig */;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(C74SUPPORT)/max-includes\"",
+					"\"$(C74SUPPORT)/msp-includes\"",
+					"\"$(C74SUPPORT)/jit-includes\"",
+					/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers,
+					/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreServices.framework/Versions/Current/Frameworks/LaunchServices.framework/Versions/Current/Headers,
+				);
 				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
 			};
 			name = Deployment;

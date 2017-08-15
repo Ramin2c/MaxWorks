@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 132.0, 119.0, 969.0, 742.0 ],
+		"rect" : [ -1716.0, 79.0, 969.0, 742.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -38,26 +38,29 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
-					"id" : "obj-8",
+					"id" : "obj-2",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 741.0, 377.0, 41.0, 22.0 ],
+					"numoutlets" : 2,
+					"outlettype" : [ "jit_matrix", "" ],
+					"patching_rect" : [ 717.0, 434.0, 46.0, 22.0 ],
 					"style" : "",
-					"text" : "mylist"
+					"text" : "jit.print"
 				}
 
 			}
 , 			{
 				"box" : 				{
-					"id" : "obj-2",
-					"maxclass" : "newobj",
+					"fontface" : 0,
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-14",
+					"maxclass" : "jit.fpsgui",
 					"numinlets" : 1,
-					"numoutlets" : 3,
-					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 741.0, 289.0, 40.0, 22.0 ],
-					"style" : "",
-					"text" : "jit.iter"
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"patching_rect" : [ 247.0, 596.0, 80.0, 35.0 ],
+					"style" : ""
 				}
 
 			}
@@ -68,7 +71,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "jit_matrix", "" ],
-					"patching_rect" : [ 116.0, 289.0, 71.0, 22.0 ],
+					"patching_rect" : [ 723.0, 264.0, 71.0, 22.0 ],
 					"style" : "",
 					"text" : "jit.mymatrix"
 				}
@@ -209,23 +212,14 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "jit_matrix", "" ],
-					"patching_rect" : [ 247.0, 212.0, 100.0, 22.0 ],
+					"patching_rect" : [ 247.0, 212.0, 80.0, 22.0 ],
 					"style" : "",
-					"text" : "jit.grab 1024 768"
+					"text" : "jit.grab 10 10"
 				}
 
 			}
  ],
 		"lines" : [ 			{
-				"patchline" : 				{
-					"destination" : [ "obj-2", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-1", 0 ]
-				}
-
-			}
-, 			{
 				"patchline" : 				{
 					"destination" : [ "obj-3", 0 ],
 					"disabled" : 0,
@@ -272,10 +266,10 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-8", 0 ],
+					"destination" : [ "obj-14", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"source" : [ "obj-2", 0 ]
+					"source" : [ "obj-3", 0 ]
 				}
 
 			}
@@ -309,10 +303,6 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "jit.mymatrix.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "mylist.mxo",
 				"type" : "iLaX"
 			}
  ],

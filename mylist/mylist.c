@@ -10,6 +10,8 @@
 #endif // WIN32
 
 #include "ext.h"
+#include <bmpGenerator.h>
+#include <fastFifo.h>
 
 static t_class *this_class;
 
@@ -35,6 +37,9 @@ void ext_main(void *r){
     class_register(CLASS_BOX, c);
     
     this_class = c;
+    
+    //initialize the buffer queue
+    initQueue(0);
 } 
 
 void *mylist_new(){
@@ -47,32 +52,32 @@ void mylist_free(){
     //clean up, free memory, etc
 }
 
-typedef struct pallete{
-    long a;
-    long r;
-    long g;
-    long b;
-}argb;
 
-argb pixels[100];
+argb pixels[786432];
+t_atom atoms[90000];
 int i = 0;
 
 //Message Handlers
 void receiveList(t_mylist *list, t_symbol *sym, long argc, t_atom *atom){
-    long a = atom_getlong(atom);
-    long r = atom_getlong(atom + 1);
-    long g = atom_getlong(atom + 2);
-    long b = atom_getlong(atom + 3);
-    argb c;
-    c.a = a;
-    c.r = r;
-    c.g = g;
-    c.b = b;
-    pixels[i] = c;
-    i++;
-    post("%d %d %d %d", a, r, g, b);
+//    buffer* buf = createBuffer(atom);
+//    enqueue(buf);
+//    long a = atom_getlong(atom);
+//    long r = atom_getlong(atom + 1);
+//    long g = atom_getlong(atom + 2);
+//    long b = atom_getlong(atom + 3);
+//    argb c;
+//    c.a = a;
+//    c.r = r;
+//    c.g = g;
+//    c.b = b;
+//    pixels[i] = c;
+//    i++;
+//    //post("%d %d %d %d", a, r, g, b);
 }
 
 void dobang(t_mylist *list){
-    
+    post("Start writing.");
+    generateBitmap(pixels, 1024, 768);
+    i = 0;
+    post("Writing finished.");
 }

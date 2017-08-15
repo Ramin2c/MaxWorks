@@ -120,12 +120,30 @@ t_jit_err jit_mymatrix_matrix_calc(t_jit_mymatrix *x,
     
     t_jit_matrix_info info;
     jit_object_method(inMatrix, _jit_sym_getinfo, &info);
-    post("matrix calc counted number of planes: %ld", info.planecount);
-    post("matrix calc counted number of dimensions: %ld", info.dimcount);
-    for (int i=0; i<info.dimcount; i++) {
-        long dim = info.dim[i];
-        post("matrix calc counted dimension %d: %ld", i, dim);
+    
+    long planeCount = info.planecount;
+    long dimCount = info.dimcount;
+    long width = info.dim[0];
+    long height = info.dim[1];
+    post("planecount = %d, width = %d, height = %d, dimstride = %d", planeCount, width, height, info.dimstride[1]);
+
+    char* inMatrixData;
+    jit_object_method(inMatrix, _jit_sym_getdata, &inMatrixData);
+    for (long i=0; i<height; i++) {
+        uchar* ip = (uchar*)(inMatrixData + i*info.dimstride[1]);
+        for (long j = 0; j < width; j++) {
+            for (long k = 0; k < planeCount; k++) {
+//                long a = *ip;
+//                long r = *(ip + 1);
+//                long g = *(ip + 2);
+//                long b = *(ip + 3);
+            }
+            post("coord %d %d ARGB %d %d %d %d", i, j, a, r, g, b);
+
+//            ip++;
+        }
     }
+
     jit_object_method(inMatrix, _jit_sym_lock, inMatrixLock);
     return err;
 }
