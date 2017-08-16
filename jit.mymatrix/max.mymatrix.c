@@ -34,7 +34,7 @@ void ext_main(void *r)
 //    );
 
     setup(
-          &class_max_mymatrix,
+          (t_messlist**)&class_max_mymatrix,
           (method)max_mymatrix_new,
           (method)max_mymatrix_free,
           (short)sizeof(t_max_mymatrix),
