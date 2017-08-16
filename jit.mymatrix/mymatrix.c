@@ -125,22 +125,28 @@ t_jit_err jit_mymatrix_matrix_calc(t_jit_mymatrix *x,
 	long dimCount = info.dimcount;
 	long width = info.dim[0];
 	long height = info.dim[1];
-	post("planecount = %d, width = %d, height = %d, dimstride = %d", planeCount, width, height, info.dimstride[1]);
+    long dimStrideW = info.dimstride[0];
+    long dimStrideH = info.dimstride[1];
+    long dataWidth = (width + dimStrideW) * planeCount;
+	post("dimcount = %d, planecount = %d, width = %d, height = %d, dimstrideW = %d, dimStrideH = %d", dimCount, planeCount, width, height, dimStrideW, dimStrideH);
 
 	char* inMatrixData;
 	jit_object_method(inMatrix, _jit_sym_getdata, &inMatrixData);
-	uchar* ip = (uchar*)inMatrixData;
+	
+    for (long i = 0; i < height; i++) {
+        uchar* ip = (uchar*)inMatrixData + (i * dimStrideH);
+        for (long j = 0; j < width; j++) {
+            long a = *ip;
+            long r = *(ip + 1);
+            long g = *(ip + 2);
+            long b = *(ip + 3);
+            ip += 4;
+            post("ARGB %d %d %d %d", a, r, g, b);
+        }
+    }
 
-	long arrayLen = (width * height) / planeCount;
-	for (size_t i = 0; i < arrayLen; i+=planeCount)
-	{
-		long a = *ip;
-		long r = *(ip + 1);
-		long g = *(ip + 2);
-		long b = *(ip + 3);
-		post("ARGB %d %d %d %d", a, r, g, b);
-	}
-	//    for (long i=0; i<height; i++) {
+    
+    //    for (long i=0; i<height; i++) {
 //        uchar* ip = (uchar*)(inMatrixData + i*info.dimstride[1]);
 //        for (long j = 0; j < width; j++) {
 //            for (long k = 0; k < planeCount; k++) {
