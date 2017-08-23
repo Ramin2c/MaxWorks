@@ -8,6 +8,50 @@
 
 
 #include "jit.common.h"
+#include <CGBitmapContext.h>
+#include <ImageIO/ImageIO.h>
+#include <UTCoreTypes.h>
+
+typedef struct argbColorSpace{
+    long a;
+    long r;
+    long g;
+    long b;
+}argb;
+
+void generateBitmap(argb* buffer, size_t width, size_t height){
+    char* rgba = (char*)malloc(width*height*4);
+    for(int i=0; i < width*height; ++i) {
+        rgba[4*i] = buffer[i].r;
+        rgba[4*i+1] = buffer[i].g;
+        rgba[4*i+2] = buffer[i].b;
+        rgba[4*i+3] = buffer[i].a;
+    }
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef bitmapContext = CGBitmapContextCreate(
+                                                       rgba,
+                                                       width,
+                                                       height,
+                                                       8, // bitsPerComponent
+                                                       4*width, // bytesPerRow
+                                                       colorSpace,
+                                                       kCGImageAlphaNoneSkipLast);
+    
+    CFRelease(colorSpace);
+    
+    CGImageRef cgImage = CGBitmapContextCreateImage(bitmapContext);
+    CFURLRef url = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, CFSTR("/Users/Ramin/Desktop/image.png"), kCFURLPOSIXPathStyle, false);
+    
+    CFStringRef type = kUTTypePNG; // or kUTTypeBMP if you like
+    CGImageDestinationRef dest = CGImageDestinationCreateWithURL(url, type, 1, 0);
+    
+    CGImageDestinationAddImage(dest, cgImage, 0);
+    
+    CFRelease(cgImage);
+    CFRelease(bitmapContext);
+    CGImageDestinationFinalize(dest);
+    free(rgba);
+}
 
 typedef struct _jit_mymatrix
 {
@@ -130,37 +174,43 @@ t_jit_err jit_mymatrix_matrix_calc(t_jit_mymatrix *x,
     long dataWidth = (width + dimStrideW) * planeCount;
 	post("dimcount = %d, planecount = %d, width = %d, height = %d, dimstrideW = %d, dimStrideH = %d", dimCount, planeCount, width, height, dimStrideW, dimStrideH);
 
-	char* inMatrixData;
+	unsigned char* inMatrixData;
 	jit_object_method(inMatrix, _jit_sym_getdata, &inMatrixData);
-	
+
+    unsigned char* argb = (unsigned char*)malloc(width * height * 4);
+    for (long i = 0; i < height; i++) {
+        uchar* ip = (uchar*)inMatrixData + (i * dimStrideH);
+        memcpy(argb + (i * dimStrideH), ip, width);
+    }
+    
+    for (long i = 0; i < width * height; i+=4) {
+        uchar a = argb[i];
+        uchar r = argb[i + 1];
+        uchar g = argb[i + 2];
+        uchar b = argb[i + 3];
+        post("A R G B = %d %d %d %d ", a, r, g, b);
+    }
+    
+    post("----------------");
+    long index = 0;
     for (long i = 0; i < height; i++) {
         uchar* ip = (uchar*)inMatrixData + (i * dimStrideH);
         for (long j = 0; j < width; j++) {
-            long a = *ip;
-            long r = *(ip + 1);
-            long g = *(ip + 2);
-            long b = *(ip + 3);
+            argb buf;
+            buf.a = *ip;
+            buf.r = *(ip + 1);
+            buf.g = *(ip + 2);
+            buf.b = *(ip + 3);
+            
+            //*(buffer + index) = buf;
+            post("A R G B = %d %d %d %d ", buf.a, buf.r, buf.g, buf.b);
+            index++;
             ip += 4;
-            post("ARGB %d %d %d %d", a, r, g, b);
         }
     }
-
+    //generateBitmap(buffer, width, height);
+    post("DONE!!!");
     
-    //    for (long i=0; i<height; i++) {
-//        uchar* ip = (uchar*)(inMatrixData + i*info.dimstride[1]);
-//        for (long j = 0; j < width; j++) {
-//            for (long k = 0; k < planeCount; k++) {
-////                long a = *ip;
-////                long r = *(ip + 1);
-////                long g = *(ip + 2);
-////                long b = *(ip + 3);
-//            }
-//            post("coord %d %d ARGB %d %d %d %d", i, j, a, r, g, b);
-//
-////            ip++;
-//        }
-//    }
-
 	jit_object_method(inMatrix, _jit_sym_lock, inMatrixLock);
 	return err;
 }

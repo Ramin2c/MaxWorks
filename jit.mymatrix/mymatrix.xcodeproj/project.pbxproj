@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		F5B3AE6E1F2B60F00007CB60 /* mymatrix.c in Sources */ = {isa = PBXBuildFile; fileRef = F5B3AE6D1F2B60F00007CB60 /* mymatrix.c */; };
 		F5B3AE701F2B63620007CB60 /* max.mymatrix.c in Sources */ = {isa = PBXBuildFile; fileRef = F5B3AE6F1F2B63620007CB60 /* max.mymatrix.c */; };
+		F5C856521F4D62F6001AED9B /* libGraphics.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5C856511F4D62F6001AED9B /* libGraphics.dylib */; };
+		F5C856631F4D7328001AED9B /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5C856621F4D7328001AED9B /* ApplicationServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -16,6 +18,8 @@
 		2FBBEAE508F335360078DB84 /* jit.mymatrix.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = jit.mymatrix.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5B3AE6D1F2B60F00007CB60 /* mymatrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mymatrix.c; sourceTree = "<group>"; };
 		F5B3AE6F1F2B63620007CB60 /* max.mymatrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = max.mymatrix.c; sourceTree = "<group>"; };
+		F5C856511F4D62F6001AED9B /* libGraphics.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGraphics.dylib; path = ../../../../../../../LiveLing/Utilities/build/Debug/libGraphics.dylib; sourceTree = "<group>"; };
+		F5C856621F4D7328001AED9B /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -23,6 +27,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5C856631F4D7328001AED9B /* ApplicationServices.framework in Frameworks */,
+				F5C856521F4D62F6001AED9B /* libGraphics.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -35,6 +41,7 @@
 				22CF10220EE984600054F513 /* maxmspsdk.xcconfig */,
 				08FB77ADFE841716C02AAC07 /* Source */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
+				F5C856501F4D62F6001AED9B /* Frameworks */,
 			);
 			name = iterator;
 			sourceTree = "<group>";
@@ -54,6 +61,15 @@
 				2FBBEAE508F335360078DB84 /* jit.mymatrix.mxo */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F5C856501F4D62F6001AED9B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F5C856621F4D7328001AED9B /* ApplicationServices.framework */,
+				F5C856511F4D62F6001AED9B /* libGraphics.dylib */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,10 +180,18 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22CF10220EE984600054F513 /* maxmspsdk.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = (
+					"\"$(C74SUPPORT)/max-includes\"",
+					"\"$(C74SUPPORT)/msp-includes\"",
+					"\"$(C74SUPPORT)/jit-includes\"",
+				);
+				LIBRARY_SEARCH_PATHS = /Users/Ramin/LiveLing/Utilities/build/Debug;
 				PRODUCT_NAME = jit.mymatrix;
+				USER_HEADER_SEARCH_PATHS = "/Users/Ramin/LiveLing/Utilities/src/Graphics /Users/Ramin/LiveLing/Utilities/build/Debug";
 			};
 			name = Development;
 		};
@@ -175,9 +199,17 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22CF10220EE984600054F513 /* maxmspsdk.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(C74SUPPORT)/max-includes\"",
+					"\"$(C74SUPPORT)/msp-includes\"",
+					"\"$(C74SUPPORT)/jit-includes\"",
+				);
+				LIBRARY_SEARCH_PATHS = /Users/Ramin/LiveLing/Utilities/build/Debug;
 				PRODUCT_NAME = jit.mymatrix;
+				USER_HEADER_SEARCH_PATHS = "/Users/Ramin/LiveLing/Utilities/src/Graphics /Users/Ramin/LiveLing/Utilities/build/Debug";
 			};
 			name = Deployment;
 		};

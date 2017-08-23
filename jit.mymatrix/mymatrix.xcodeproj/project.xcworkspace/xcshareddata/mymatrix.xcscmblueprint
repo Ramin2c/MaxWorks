@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "6F6AE14CE4853912D71103903C1B50AEE567BD6E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "6F6AE14CE4853912D71103903C1B50AEE567BD6E" : 9223372036854775807,
+    "5EAB30BCED1B73309F1AD8EA9643A645B032E605" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "0122966E-F0D9-4309-BDEC-6968C6377447",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "6F6AE14CE4853912D71103903C1B50AEE567BD6E" : "liveling\/",
+    "5EAB30BCED1B73309F1AD8EA9643A645B032E605" : "..\/..\/..\/..\/..\/LiveLing\/Utilities"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "mymatrix",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "jit.mymatrix\/mymatrix.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Ramin2c\/Utilities.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5EAB30BCED1B73309F1AD8EA9643A645B032E605"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Ramin2c\/MaxWorks.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6F6AE14CE4853912D71103903C1B50AEE567BD6E"
+    }
+  ]
+}
