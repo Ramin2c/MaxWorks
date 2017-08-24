@@ -9,8 +9,10 @@
 /* Begin PBXBuildFile section */
 		F5B3AE6E1F2B60F00007CB60 /* mymatrix.c in Sources */ = {isa = PBXBuildFile; fileRef = F5B3AE6D1F2B60F00007CB60 /* mymatrix.c */; };
 		F5B3AE701F2B63620007CB60 /* max.mymatrix.c in Sources */ = {isa = PBXBuildFile; fileRef = F5B3AE6F1F2B63620007CB60 /* max.mymatrix.c */; };
-		F5C856521F4D62F6001AED9B /* libGraphics.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5C856511F4D62F6001AED9B /* libGraphics.dylib */; };
 		F5C856631F4D7328001AED9B /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5C856621F4D7328001AED9B /* ApplicationServices.framework */; };
+		F5C8567F1F4EE09A001AED9B /* gsUtil.c in Sources */ = {isa = PBXBuildFile; fileRef = F5C8567D1F4EE09A001AED9B /* gsUtil.c */; };
+		F5C856801F4EE09A001AED9B /* gsUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = F5C8567E1F4EE09A001AED9B /* gsUtil.h */; };
+		F5C856821F4EE1E9001AED9B /* GStreamer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5C856811F4EE1E9001AED9B /* GStreamer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,9 @@
 		F5B3AE6F1F2B63620007CB60 /* max.mymatrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = max.mymatrix.c; sourceTree = "<group>"; };
 		F5C856511F4D62F6001AED9B /* libGraphics.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGraphics.dylib; path = ../../../../../../../LiveLing/Utilities/build/Debug/libGraphics.dylib; sourceTree = "<group>"; };
 		F5C856621F4D7328001AED9B /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
+		F5C8567D1F4EE09A001AED9B /* gsUtil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gsUtil.c; sourceTree = "<group>"; };
+		F5C8567E1F4EE09A001AED9B /* gsUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gsUtil.h; sourceTree = "<group>"; };
+		F5C856811F4EE1E9001AED9B /* GStreamer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GStreamer.framework; path = ../../../../../../../../../Library/Frameworks/GStreamer.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,8 +32,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5C856821F4EE1E9001AED9B /* GStreamer.framework in Frameworks */,
 				F5C856631F4D7328001AED9B /* ApplicationServices.framework in Frameworks */,
-				F5C856521F4D62F6001AED9B /* libGraphics.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,6 +56,8 @@
 			children = (
 				F5B3AE6F1F2B63620007CB60 /* max.mymatrix.c */,
 				F5B3AE6D1F2B60F00007CB60 /* mymatrix.c */,
+				F5C8567D1F4EE09A001AED9B /* gsUtil.c */,
+				F5C8567E1F4EE09A001AED9B /* gsUtil.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -66,6 +73,7 @@
 		F5C856501F4D62F6001AED9B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F5C856811F4EE1E9001AED9B /* GStreamer.framework */,
 				F5C856621F4D7328001AED9B /* ApplicationServices.framework */,
 				F5C856511F4D62F6001AED9B /* libGraphics.dylib */,
 			);
@@ -79,6 +87,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5C856801F4EE09A001AED9B /* gsUtil.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,6 +167,7 @@
 			files = (
 				F5B3AE701F2B63620007CB60 /* max.mymatrix.c in Sources */,
 				F5B3AE6E1F2B60F00007CB60 /* mymatrix.c in Sources */,
+				F5C8567F1F4EE09A001AED9B /* gsUtil.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,15 +193,19 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				GCC_OPTIMIZATION_LEVEL = 0;
 				HEADER_SEARCH_PATHS = (
 					"\"$(C74SUPPORT)/max-includes\"",
 					"\"$(C74SUPPORT)/msp-includes\"",
 					"\"$(C74SUPPORT)/jit-includes\"",
+					/Library/Frameworks/GStreamer.framework/Headers,
 				);
-				LIBRARY_SEARCH_PATHS = /Users/Ramin/LiveLing/Utilities/build/Debug;
+				LIBRARY_SEARCH_PATHS = /Library/Frameworks/GStreamer.framework/Libraries;
 				PRODUCT_NAME = jit.mymatrix;
-				USER_HEADER_SEARCH_PATHS = "/Users/Ramin/LiveLing/Utilities/src/Graphics /Users/Ramin/LiveLing/Utilities/build/Debug";
 			};
 			name = Development;
 		};
@@ -202,14 +216,18 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				HEADER_SEARCH_PATHS = (
 					"\"$(C74SUPPORT)/max-includes\"",
 					"\"$(C74SUPPORT)/msp-includes\"",
 					"\"$(C74SUPPORT)/jit-includes\"",
+					/Library/Frameworks/GStreamer.framework/Headers,
 				);
-				LIBRARY_SEARCH_PATHS = /Users/Ramin/LiveLing/Utilities/build/Debug;
+				LIBRARY_SEARCH_PATHS = /Library/Frameworks/GStreamer.framework/Libraries;
 				PRODUCT_NAME = jit.mymatrix;
-				USER_HEADER_SEARCH_PATHS = "/Users/Ramin/LiveLing/Utilities/src/Graphics /Users/Ramin/LiveLing/Utilities/build/Debug";
 			};
 			name = Deployment;
 		};

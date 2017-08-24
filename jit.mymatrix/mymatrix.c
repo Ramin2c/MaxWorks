@@ -8,49 +8,77 @@
 
 
 #include "jit.common.h"
-#include <CGBitmapContext.h>
-#include <ImageIO/ImageIO.h>
-#include <UTCoreTypes.h>
+#include "gsUtil.h"
+#include <stdio.h>
 
-typedef struct argbColorSpace{
-    long a;
-    long r;
-    long g;
-    long b;
-}argb;
-
-void generateBitmap(argb* buffer, size_t width, size_t height){
-    char* rgba = (char*)malloc(width*height*4);
-    for(int i=0; i < width*height; ++i) {
-        rgba[4*i] = buffer[i].r;
-        rgba[4*i+1] = buffer[i].g;
-        rgba[4*i+2] = buffer[i].b;
-        rgba[4*i+3] = buffer[i].a;
-    }
+void writeBitmaptoMemory(unsigned char* buffer, size_t width, size_t height){
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGContextRef bitmapContext = CGBitmapContextCreate(
-                                                       rgba,
+                                                       buffer,
                                                        width,
                                                        height,
                                                        8, // bitsPerComponent
                                                        4*width, // bytesPerRow
                                                        colorSpace,
-                                                       kCGImageAlphaNoneSkipLast);
+                                                       kCGImageAlphaPremultipliedFirst);
+    
+    CFRelease(colorSpace);
+    
+    CGImageRef cgImage = CGBitmapContextCreateImage(bitmapContext);
+    CFStringRef type = kUTTypeBMP; // or kUTTypePNG if you like
+    CFMutableDataRef dataRef = CFDataCreateMutable(NULL, width * height);
+    
+    CFDataAppendBytes(dataRef, buffer, width * height);
+    CGImageDestinationRef dest = CGImageDestinationCreateWithData(dataRef, type, 1, NULL);
+
+    CGImageDestinationAddImage(dest, cgImage, 0);
+//
+//    
+//    CFRelease(cgImage);
+//    CFRelease(bitmapContext);
+//    CGImageDestinationFinalize(dest);
+    
+    post("writing to memory finished!");
+}
+
+void writeBitmaptoFile(unsigned char* buffer, size_t width, size_t height){
+    
+    FILE* f = fopen("/Users/Ramin/Desktop/image.buf", "w");
+    for (int i = 0; i < width * height * 4; i++) {
+        fprintf(f, "%c", *(buffer+i));
+    }
+//    int results = fputs(buffer, f);
+//    if (results == EOF) {
+//        post("failed to write");
+//    }
+    fclose(f);
+
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef bitmapContext = CGBitmapContextCreate(
+                                                       buffer,
+                                                       width,
+                                                       height,
+                                                       8, // bitsPerComponent
+                                                       4*width, // bytesPerRow
+                                                       colorSpace,
+                                                       kCGImageAlphaPremultipliedFirst);
     
     CFRelease(colorSpace);
     
     CGImageRef cgImage = CGBitmapContextCreateImage(bitmapContext);
     CFURLRef url = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, CFSTR("/Users/Ramin/Desktop/image.png"), kCFURLPOSIXPathStyle, false);
     
-    CFStringRef type = kUTTypePNG; // or kUTTypeBMP if you like
+    CFStringRef type = kUTTypeBMP; // or kUTTypePNG if you like
     CGImageDestinationRef dest = CGImageDestinationCreateWithURL(url, type, 1, 0);
     
     CGImageDestinationAddImage(dest, cgImage, 0);
     
+
     CFRelease(cgImage);
     CFRelease(bitmapContext);
     CGImageDestinationFinalize(dest);
-    free(rgba);
+    
+    post("writing to the file finished!");
 }
 
 typedef struct _jit_mymatrix
@@ -108,6 +136,11 @@ t_jit_err jit_mymatrix_init(void)
 	//return class
 	jit_class_register(_jit_mymatrix_class);
 
+    
+    //Start G-Streamer
+//    post("starting the pipeline");
+//    initPipeline(NULL, NULL);
+    
 	return JIT_ERR_NONE;
 }
 
@@ -171,45 +204,22 @@ t_jit_err jit_mymatrix_matrix_calc(t_jit_mymatrix *x,
 	long height = info.dim[1];
     long dimStrideW = info.dimstride[0];
     long dimStrideH = info.dimstride[1];
-    long dataWidth = (width + dimStrideW) * planeCount;
 	post("dimcount = %d, planecount = %d, width = %d, height = %d, dimstrideW = %d, dimStrideH = %d", dimCount, planeCount, width, height, dimStrideW, dimStrideH);
 
 	unsigned char* inMatrixData;
 	jit_object_method(inMatrix, _jit_sym_getdata, &inMatrixData);
 
-    unsigned char* argb = (unsigned char*)malloc(width * height * 4);
+    //remove the stride bytes from the data
+    unsigned char* pixelsBuffer = (unsigned char*)malloc(width * height * 4);
     for (long i = 0; i < height; i++) {
         uchar* ip = (uchar*)inMatrixData + (i * dimStrideH);
-        memcpy(argb + (i * dimStrideH), ip, width);
+        memcpy(pixelsBuffer + (i * width * 4), ip, width * 4);
     }
     
-    for (long i = 0; i < width * height; i+=4) {
-        uchar a = argb[i];
-        uchar r = argb[i + 1];
-        uchar g = argb[i + 2];
-        uchar b = argb[i + 3];
-        post("A R G B = %d %d %d %d ", a, r, g, b);
-    }
-    
-    post("----------------");
-    long index = 0;
-    for (long i = 0; i < height; i++) {
-        uchar* ip = (uchar*)inMatrixData + (i * dimStrideH);
-        for (long j = 0; j < width; j++) {
-            argb buf;
-            buf.a = *ip;
-            buf.r = *(ip + 1);
-            buf.g = *(ip + 2);
-            buf.b = *(ip + 3);
-            
-            //*(buffer + index) = buf;
-            post("A R G B = %d %d %d %d ", buf.a, buf.r, buf.g, buf.b);
-            index++;
-            ip += 4;
-        }
-    }
-    //generateBitmap(buffer, width, height);
-    post("DONE!!!");
+    //writeBitmaptoMemory(pixelsBuffer, width, height);
+    writeBitmaptoFile(pixelsBuffer, width, height);
+//    free(pixelsBuffer);
+//    post("DONE!!!");
     
 	jit_object_method(inMatrix, _jit_sym_lock, inMatrixLock);
 	return err;
