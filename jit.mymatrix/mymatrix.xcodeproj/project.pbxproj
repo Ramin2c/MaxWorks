@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F523A33B1F55B6650047DC91 /* libCollections.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F523A33A1F55B6650047DC91 /* libCollections.dylib */; };
+		F5767CAB1F545E8300CD291C /* tcpSendData.c in Sources */ = {isa = PBXBuildFile; fileRef = F5767CA91F545E8300CD291C /* tcpSendData.c */; };
+		F5767CAC1F545E8300CD291C /* tcpSendData.h in Headers */ = {isa = PBXBuildFile; fileRef = F5767CAA1F545E8300CD291C /* tcpSendData.h */; };
 		F5B3AE6E1F2B60F00007CB60 /* mymatrix.c in Sources */ = {isa = PBXBuildFile; fileRef = F5B3AE6D1F2B60F00007CB60 /* mymatrix.c */; };
 		F5B3AE701F2B63620007CB60 /* max.mymatrix.c in Sources */ = {isa = PBXBuildFile; fileRef = F5B3AE6F1F2B63620007CB60 /* max.mymatrix.c */; };
 		F5C856631F4D7328001AED9B /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5C856621F4D7328001AED9B /* ApplicationServices.framework */; };
@@ -18,6 +21,9 @@
 /* Begin PBXFileReference section */
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
 		2FBBEAE508F335360078DB84 /* jit.mymatrix.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = jit.mymatrix.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
+		F523A33A1F55B6650047DC91 /* libCollections.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCollections.dylib; path = ../../../../../../../LiveLing/Utilities/build/Debug/libCollections.dylib; sourceTree = "<group>"; };
+		F5767CA91F545E8300CD291C /* tcpSendData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tcpSendData.c; sourceTree = "<group>"; };
+		F5767CAA1F545E8300CD291C /* tcpSendData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tcpSendData.h; sourceTree = "<group>"; };
 		F5B3AE6D1F2B60F00007CB60 /* mymatrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mymatrix.c; sourceTree = "<group>"; };
 		F5B3AE6F1F2B63620007CB60 /* max.mymatrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = max.mymatrix.c; sourceTree = "<group>"; };
 		F5C856511F4D62F6001AED9B /* libGraphics.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGraphics.dylib; path = ../../../../../../../LiveLing/Utilities/build/Debug/libGraphics.dylib; sourceTree = "<group>"; };
@@ -32,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F523A33B1F55B6650047DC91 /* libCollections.dylib in Frameworks */,
 				F5C856821F4EE1E9001AED9B /* GStreamer.framework in Frameworks */,
 				F5C856631F4D7328001AED9B /* ApplicationServices.framework in Frameworks */,
 			);
@@ -58,6 +65,8 @@
 				F5B3AE6D1F2B60F00007CB60 /* mymatrix.c */,
 				F5C8567D1F4EE09A001AED9B /* gsUtil.c */,
 				F5C8567E1F4EE09A001AED9B /* gsUtil.h */,
+				F5767CA91F545E8300CD291C /* tcpSendData.c */,
+				F5767CAA1F545E8300CD291C /* tcpSendData.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -73,6 +82,7 @@
 		F5C856501F4D62F6001AED9B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F523A33A1F55B6650047DC91 /* libCollections.dylib */,
 				F5C856811F4EE1E9001AED9B /* GStreamer.framework */,
 				F5C856621F4D7328001AED9B /* ApplicationServices.framework */,
 				F5C856511F4D62F6001AED9B /* libGraphics.dylib */,
@@ -87,6 +97,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5767CAC1F545E8300CD291C /* tcpSendData.h in Headers */,
 				F5C856801F4EE09A001AED9B /* gsUtil.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,6 +177,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5B3AE701F2B63620007CB60 /* max.mymatrix.c in Sources */,
+				F5767CAB1F545E8300CD291C /* tcpSendData.c in Sources */,
 				F5B3AE6E1F2B60F00007CB60 /* mymatrix.c in Sources */,
 				F5C8567F1F4EE09A001AED9B /* gsUtil.c in Sources */,
 			);
@@ -203,8 +215,12 @@
 					"\"$(C74SUPPORT)/msp-includes\"",
 					"\"$(C74SUPPORT)/jit-includes\"",
 					/Library/Frameworks/GStreamer.framework/Headers,
+					/Users/Ramin/LiveLing/Utilities/src/Collections,
 				);
-				LIBRARY_SEARCH_PATHS = /Library/Frameworks/GStreamer.framework/Libraries;
+				LIBRARY_SEARCH_PATHS = (
+					/Library/Frameworks/GStreamer.framework/Libraries,
+					/Users/Ramin/LiveLing/Utilities/build/Debug,
+				);
 				PRODUCT_NAME = jit.mymatrix;
 			};
 			name = Development;
@@ -225,8 +241,12 @@
 					"\"$(C74SUPPORT)/msp-includes\"",
 					"\"$(C74SUPPORT)/jit-includes\"",
 					/Library/Frameworks/GStreamer.framework/Headers,
+					/Users/Ramin/LiveLing/Utilities/src/Collections,
 				);
-				LIBRARY_SEARCH_PATHS = /Library/Frameworks/GStreamer.framework/Libraries;
+				LIBRARY_SEARCH_PATHS = (
+					/Library/Frameworks/GStreamer.framework/Libraries,
+					/Users/Ramin/LiveLing/Utilities/build/Debug,
+				);
 				PRODUCT_NAME = jit.mymatrix;
 			};
 			name = Deployment;

@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 85.0, 181.0, 872.0, 742.0 ],
+		"rect" : [ 146.0, 196.0, 872.0, 742.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -211,9 +211,9 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "jit_matrix", "" ],
-					"patching_rect" : [ 247.0, 212.0, 80.0, 22.0 ],
+					"patching_rect" : [ 247.0, 212.0, 93.0, 22.0 ],
 					"style" : "",
-					"text" : "jit.grab 10 10"
+					"text" : "jit.grab 200 200"
 				}
 
 			}

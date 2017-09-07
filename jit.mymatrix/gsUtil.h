@@ -13,7 +13,17 @@
 
 #include <stdio.h>
 
-int initPipeline(int argc, char * argv[]);
+/*
+ playbin flags
+ borrowed from playback-tutorial-1.c
+ */
+typedef enum {
+    GST_PLAY_FLAG_VIDEO         = (1 << 0), /* We want video output */
+    GST_PLAY_FLAG_AUDIO         = (1 << 1), /* We want audio output */
+    GST_PLAY_FLAG_TEXT          = (1 << 2)  /* We want subtitle output */
+} GstPlayFlags;
+
+int initPipeline();
 void setBuffer(unsigned char* bytes);
 
 #endif /* gsUtil_h */

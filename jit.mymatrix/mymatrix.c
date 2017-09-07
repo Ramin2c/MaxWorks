@@ -10,6 +10,8 @@
 #include "jit.common.h"
 #include "gsUtil.h"
 #include <stdio.h>
+#include "fifo.h"
+
 
 void writeBitmaptoMemory(unsigned char* buffer, size_t width, size_t height){
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
@@ -43,9 +45,10 @@ void writeBitmaptoMemory(unsigned char* buffer, size_t width, size_t height){
 
 void writeBitmaptoFile(unsigned char* buffer, size_t width, size_t height){
     
-    FILE* f = fopen("/Users/Ramin/Desktop/image.buf", "w");
+    FILE* f = fopen("/Users/Ramin/Desktop/image.buf", "wb, ccs=UTF-8");
     for (int i = 0; i < width * height * 4; i++) {
         fprintf(f, "%c", *(buffer+i));
+        //post(*(buffer+i));
     }
 //    int results = fputs(buffer, f);
 //    if (results == EOF) {
@@ -141,6 +144,9 @@ t_jit_err jit_mymatrix_init(void)
 //    post("starting the pipeline");
 //    initPipeline(NULL, NULL);
     
+    //setupTCPSender(5555);
+    
+    
 	return JIT_ERR_NONE;
 }
 
@@ -155,8 +161,9 @@ t_jit_mymatrix *jit_mymatrix_new(void)
 	if (x) {
 		//if successful, perfom any initialization
 		x->myval = 0;
-	}
-	return x;
+    }
+	
+    return x;
 }
 
 //dtor
@@ -210,14 +217,21 @@ t_jit_err jit_mymatrix_matrix_calc(t_jit_mymatrix *x,
 	jit_object_method(inMatrix, _jit_sym_getdata, &inMatrixData);
 
     //remove the stride bytes from the data
-    unsigned char* pixelsBuffer = (unsigned char*)malloc(width * height * 4);
+    unsigned char* pixelsBuffer = (unsigned char*)malloc(width * height * 4 * sizeof(unsigned char));
     for (long i = 0; i < height; i++) {
         uchar* ip = (uchar*)inMatrixData + (i * dimStrideH);
         memcpy(pixelsBuffer + (i * width * 4), ip, width * 4);
     }
     
+    post("size = ", sizeof(inMatrix));
+    struct buffer*  buf = createBuffer(inMatrix, sizeof(inMatrix));
+    enqueue(buf);
+    
+    //setBuffer(pixelsBuffer);
+    //sendData(pixelsBuffer);
+    //post("size of pixelsBuffer %c : %d", pixelsBuffer, sizeof(pixelsBuffer));
     //writeBitmaptoMemory(pixelsBuffer, width, height);
-    writeBitmaptoFile(pixelsBuffer, width, height);
+    //writeBitmaptoFile(pixelsBuffer, width, height);
 //    free(pixelsBuffer);
 //    post("DONE!!!");
     
