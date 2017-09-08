@@ -6,7 +6,15 @@
 //
 //
 
+//In case of developing on Windows, use the Microsoft C runtime, instead of Max C runtime
+#ifdef WIN32
+#define MAXAPI_USE_MSCRT
+#endif // WIN32
+
 #include "jit.common.h"
+
+const short planeCount = 4;
+const short dimCount = 2;
 
 typedef struct t_jib{
     t_object obj;
@@ -67,24 +75,32 @@ t_jit_err jib_matrix_calc(t_jib* jib, void* inputs, void* outputs){
         
         //TODO: log error
         //unlock the out matrix
-        if (ominfo.dimcount != 2){
+        if (ominfo.dimcount != dimCount){
             err = JIT_ERR_MISMATCH_DIM;
             goto out;
         }
-        if (ominfo.planecount != 4){
+        if (ominfo.planecount != planeCount){
             err =  JIT_ERR_MISMATCH_PLANE;
             goto out;
         }
+        
+        //TODO: currently only char data type is supported
+        if(ominfo.type != _jit_sym_char){
+            err = JIT_ERR_MISMATCH_TYPE;
+            goto out;
+        }
+        
         if(!odata){
             err = JIT_ERR_INVALID_PTR;
             goto out;
         }
 
-        long dim[2];
+        long dim[dimCount];
         dim[0] = ominfo.dim[0];
         dim[1] = ominfo.dim[1];
         
-        jit_parallel_ndim_simplecalc1((method)jib_calc_ndim, jib, ominfo.dimcount, dim, ominfo.planecount, &ominfo, odata, 0);
+        //TODO: replace dim with a pointer to ominfo.dim if possible
+        jit_parallel_ndim_simplecalc1((method)jib_calc_ndim, jib, dimCount, dim, planeCount, &ominfo, odata, 0);
         
     }
 out:

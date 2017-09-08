@@ -7,13 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F53DD2481F61650400AD917E /* jit.jib.c in Sources */ = {isa = PBXBuildFile; fileRef = F53DD2471F61650400AD917E /* jit.jib.c */; };
+		F54F22BC1F62882800FD4ABC /* gpipeline.c in Sources */ = {isa = PBXBuildFile; fileRef = F54F22BA1F62882800FD4ABC /* gpipeline.c */; };
+		F54F22BD1F62882800FD4ABC /* gpipeline.h in Headers */ = {isa = PBXBuildFile; fileRef = F54F22BB1F62882800FD4ABC /* gpipeline.h */; };
+		F54F22C01F628CBC00FD4ABC /* GStreamer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F54F22BF1F628CBC00FD4ABC /* GStreamer.framework */; };
+		F54F22C11F62969800FD4ABC /* jit.jib.c in Sources */ = {isa = PBXBuildFile; fileRef = F53DD2471F61650400AD917E /* jit.jib.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
 		2FBBEAE508F335360078DB84 /* jit.gJibJob.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = jit.gJibJob.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		F53DD2471F61650400AD917E /* jit.jib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = jit.jib.c; sourceTree = "<group>"; };
+		F54F22BA1F62882800FD4ABC /* gpipeline.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gpipeline.c; sourceTree = "<group>"; };
+		F54F22BB1F62882800FD4ABC /* gpipeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gpipeline.h; sourceTree = "<group>"; };
+		F54F22BF1F628CBC00FD4ABC /* GStreamer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GStreamer.framework; path = ../../../../../../../../../Library/Frameworks/GStreamer.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -21,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F54F22C01F628CBC00FD4ABC /* GStreamer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -33,6 +40,7 @@
 				22CF10220EE984600054F513 /* maxmspsdk.xcconfig */,
 				08FB77ADFE841716C02AAC07 /* Source */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
+				F54F22BE1F628CBC00FD4ABC /* Frameworks */,
 			);
 			name = iterator;
 			sourceTree = "<group>";
@@ -58,6 +66,8 @@
 			isa = PBXGroup;
 			children = (
 				F53DD2471F61650400AD917E /* jit.jib.c */,
+				F54F22BA1F62882800FD4ABC /* gpipeline.c */,
+				F54F22BB1F62882800FD4ABC /* gpipeline.h */,
 			);
 			name = jib;
 			sourceTree = "<group>";
@@ -69,6 +79,14 @@
 			name = job;
 			sourceTree = "<group>";
 		};
+		F54F22BE1F628CBC00FD4ABC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F54F22BF1F628CBC00FD4ABC /* GStreamer.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -76,6 +94,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F54F22BD1F62882800FD4ABC /* gpipeline.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,7 +172,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F53DD2481F61650400AD917E /* jit.jib.c in Sources */,
+				F54F22C11F62969800FD4ABC /* jit.jib.c in Sources */,
+				F54F22BC1F62882800FD4ABC /* gpipeline.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,12 +183,57 @@
 		2FBBEAD008F335010078DB84 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(LOCAL_LIBRARY_DIR)/Frameworks/**",
+					"\"$(C74SUPPORT)/max-includes\"",
+					"\"$(C74SUPPORT)/msp-includes\"",
+					"\"$(C74SUPPORT)/jit-includes\"",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"/Library/Frameworks/GStreamer.framework/Headers/**",
+					"\"$(C74SUPPORT)/max-includes\"",
+					"\"$(C74SUPPORT)/msp-includes\"",
+					"\"$(C74SUPPORT)/jit-includes\"",
+				);
+				LIBRARY_SEARCH_PATHS = "/Library/Frameworks/GStreamer.framework/Libraries/**";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Development;
 		};
 		2FBBEAD108F335010078DB84 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(LOCAL_LIBRARY_DIR)/Frameworks/**",
+					"\"$(C74SUPPORT)/max-includes\"",
+					"\"$(C74SUPPORT)/msp-includes\"",
+					"\"$(C74SUPPORT)/jit-includes\"",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"/Library/Frameworks/GStreamer.framework/Headers/**",
+					"\"$(C74SUPPORT)/max-includes\"",
+					"\"$(C74SUPPORT)/msp-includes\"",
+					"\"$(C74SUPPORT)/jit-includes\"",
+				);
+				LIBRARY_SEARCH_PATHS = "/Library/Frameworks/GStreamer.framework/Libraries/**";
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = macosx;
+				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Deployment;
 		};
@@ -176,9 +241,24 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22CF10220EE984600054F513 /* maxmspsdk.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(C74SUPPORT)/max-includes\"",
+					"\"$(C74SUPPORT)/msp-includes\"",
+					"\"$(C74SUPPORT)/jit-includes\"",
+					"/Library/Frameworks/**",
+				);
 				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = (
+					"\"$(C74SUPPORT)/max-includes\"",
+					"\"$(C74SUPPORT)/msp-includes\"",
+					"\"$(C74SUPPORT)/jit-includes\"",
+					/Library/Frameworks/GStreamer.framework/Headers,
+				);
+				LIBRARY_SEARCH_PATHS = "/Library/Frameworks/GStreamer.framework/Libraries/**";
 				PRODUCT_NAME = jit.gJibJob;
 			};
 			name = Development;
@@ -187,8 +267,23 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22CF10220EE984600054F513 /* maxmspsdk.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(C74SUPPORT)/max-includes\"",
+					"\"$(C74SUPPORT)/msp-includes\"",
+					"\"$(C74SUPPORT)/jit-includes\"",
+					"/Library/Frameworks/**",
+				);
+				HEADER_SEARCH_PATHS = (
+					"\"$(C74SUPPORT)/max-includes\"",
+					"\"$(C74SUPPORT)/msp-includes\"",
+					"\"$(C74SUPPORT)/jit-includes\"",
+					/Library/Frameworks/GStreamer.framework/Headers,
+				);
+				LIBRARY_SEARCH_PATHS = "/Library/Frameworks/GStreamer.framework/Libraries/**";
 				PRODUCT_NAME = jit.gJibJob;
 			};
 			name = Deployment;
