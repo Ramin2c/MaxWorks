@@ -2,3 +2,6 @@
 ###################
 *.VC.opendb
 *.VC.db
+# Private Repos #
+###################
+jit.gJibJob/
